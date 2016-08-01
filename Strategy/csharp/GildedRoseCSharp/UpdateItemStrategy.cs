@@ -8,16 +8,17 @@ namespace GildedRoseCSharp
 {
     public class UpdateItemStrategy
     {
-        private static Dictionary<Item, Func<Item, Item>> strategyDict = new Dictionary<Item, Func<Item, Item>>{
-            {new Item("Sulfuras, Hand of Ragnaros"), LegendaryItem },
-            {new Item("Aged Brie"), AgedBrewItem },
-            {new Item("Backstage passes to a TAFKAL80ETC concert"), BackstagePasses },
+        private static Dictionary<String, Func<Item, Item>> strategyDict = new Dictionary<String, Func<Item, Item>>{
+            {"Sulfuras, Hand of Ragnaros", LegendaryItem },
+            {"Aged Brie", AgedBrewItem },
+            {"Backstage passes to a TAFKAL80ETC concert", BackstagePasses },
+            {"Conjured Mana Cake", ConjuredItem }
         };
 
         public static Item UpdateItem(Item i)
         {
-            if (strategyDict.ContainsKey(i))
-                return strategyDict[i](i);
+            if (strategyDict.ContainsKey(i.Name))
+                return strategyDict[i.Name](i);
             else
                 return RegularItem(i);
         }
@@ -46,9 +47,9 @@ namespace GildedRoseCSharp
 
             if (i.Quality > 0)
                 if (i.SellIn < 0)
-                    return i.decQuality().decQuality();
+                    i = i.decQuality().decQuality();
                 else
-                    return i.decQuality();
+                    i = i.decQuality();
 
             return i;
         }
@@ -69,6 +70,13 @@ namespace GildedRoseCSharp
             return i;
         }
 
+
+        private static Item ConjuredItem(Item i)
+        {
+            i = i.decSellIn();
+            return i.decQuality().decQuality();
+
+        }
 
     }
 }

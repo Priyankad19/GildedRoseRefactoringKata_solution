@@ -22,7 +22,7 @@ namespace GildedRoseCSharp.Test
 
             var app = new Program(Items);
 
-            app.UpdateQuality();
+            List<Item> ItemsReturned = app.UpdateQuality();
 
             List<Item> expectedOutput = new List<Item>()
                                           {
@@ -31,15 +31,15 @@ namespace GildedRoseCSharp.Test
                                               new Item {Name = "Elixir of the Mongoose", SellIn = 4, Quality = 6},
                                               new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
                                               new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 14, Quality = 21},
-                                              new Item {Name = "Conjured Mana Cake", SellIn = 2, Quality = 5}
+                                              new Item {Name = "Conjured Mana Cake", SellIn = 2, Quality = 4}
                                           };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
-            Assert.AreEqual<Item>(expectedOutput[1], Items[1]);
-            Assert.AreEqual<Item>(expectedOutput[2], Items[2]);
-            Assert.AreEqual<Item>(expectedOutput[3], Items[3]);
-            Assert.AreEqual<Item>(expectedOutput[4], Items[4]);
-            Assert.AreEqual<Item>(expectedOutput[5], Items[5]);
+            Assert.AreEqual<Item>(expectedOutput[0], ItemsReturned[0]);
+            Assert.AreEqual<Item>(expectedOutput[1], ItemsReturned[1]);
+            Assert.AreEqual<Item>(expectedOutput[2], ItemsReturned[2]);
+            Assert.AreEqual<Item>(expectedOutput[3], ItemsReturned[3]);
+            Assert.AreEqual<Item>(expectedOutput[4], ItemsReturned[4]);
+            Assert.AreEqual<Item>(expectedOutput[5], ItemsReturned[5]);
         }
 
 
@@ -50,11 +50,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "+5 Dexterity Vest", SellIn = 0, Quality = 20 } };
             var app = new Program(Items);
-            app.UpdateQuality();
 
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "+5 Dexterity Vest", SellIn = -1, Quality = 18 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
         }
 
         //- The Quality of an item is never negative
@@ -63,11 +62,11 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "+5 Dexterity Vest", SellIn = 0, Quality = 0 } };
             var app = new Program(Items);
-            app.UpdateQuality();
+             
 
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "+5 Dexterity Vest", SellIn = -1, Quality = 0 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
         }
 
         //- "Aged Brie" actually increases in Quality the older it gets
@@ -76,11 +75,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 } };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+           
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Aged Brie", SellIn = 1, Quality = 1 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -90,11 +88,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Aged Brie", SellIn = 2, Quality = 50 } };
             var app = new Program(Items);
-            app.UpdateQuality();
 
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Aged Brie", SellIn = 1, Quality = 50 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -104,11 +101,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 } };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0],app.UpdateQuality()[0]);
 
         }
 
@@ -119,11 +115,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 } };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+           
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 14, Quality = 21 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -132,11 +127,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 20 } };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+          
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 9, Quality = 22 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -145,11 +139,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 20 } };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+         
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 23 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -158,11 +151,22 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 20 } };
             var app = new Program(Items);
-            app.UpdateQuality();
 
             List<Item> expectedOutput = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = -1, Quality = 0 } };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
+
+        }
+
+        [TestMethod]
+        public void shouldDegradeQualityByTwo_Conjured()
+        {
+            List<Item> Items = new List<Item>() { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6 } };
+            var app = new Program(Items);
+            
+            List<Item> expectedOutput = new List<Item>() { new Item { Name = "Conjured Mana Cake", SellIn = 2, Quality = 4 } };
+
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
     }

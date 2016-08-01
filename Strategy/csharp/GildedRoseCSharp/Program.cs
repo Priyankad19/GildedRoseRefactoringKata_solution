@@ -48,9 +48,12 @@ namespace GildedRoseCSharp
 
         }
 
-        public void UpdateQuality()
+        public List<Item> UpdateQuality()
         {
-            Items.ForEach(i => UpdateItemStrategy.UpdateItem(i));
+           // Items.ForEach(i => i = UpdateItemStrategy.UpdateItem(i));
+
+            Items = Items.Select(i => UpdateItemStrategy.UpdateItem(i)).ToList<Item>();
+            return Items;
         }
 
     }
