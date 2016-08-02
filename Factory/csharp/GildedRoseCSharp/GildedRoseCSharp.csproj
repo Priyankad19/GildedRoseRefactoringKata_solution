@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>ExtendedDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AgedBrie.cs" />
     <Compile Include="BackstagePasses.cs" />
+    <Compile Include="ConjuredItem.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemFactory.cs" />
     <Compile Include="Program.cs" />

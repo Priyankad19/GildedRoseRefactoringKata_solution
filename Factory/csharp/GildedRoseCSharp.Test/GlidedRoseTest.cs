@@ -22,7 +22,7 @@ namespace GildedRoseCSharp.Test
 
             var app = new Program(Items);
 
-            app.UpdateQuality();
+            List<Item> ItemsReturned = app.UpdateQuality();
 
             List<Item> expectedOutput = new List<Item>()
                                           {
@@ -31,15 +31,15 @@ namespace GildedRoseCSharp.Test
                                               ItemFactory.GetItemByType("Elixir of the Mongoose", 4, 6),
                                               ItemFactory.GetItemByType("Sulfuras, Hand of Ragnaros", 0, 80),
                                               ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert",14,21),
-                                              ItemFactory.GetItemByType("Conjured Mana Cake", 2, 5)
+                                              ItemFactory.GetItemByType("Conjured Mana Cake", 2, 4)
                                           };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
-            Assert.AreEqual<Item>(expectedOutput[1], Items[1]);
-            Assert.AreEqual<Item>(expectedOutput[2], Items[2]);
-            Assert.AreEqual<Item>(expectedOutput[3], Items[3]);
-            Assert.AreEqual<Item>(expectedOutput[4], Items[4]);
-            Assert.AreEqual<Item>(expectedOutput[5], Items[5]);
+            Assert.AreEqual<Item>(expectedOutput[0], ItemsReturned[0]);
+            Assert.AreEqual<Item>(expectedOutput[1], ItemsReturned[1]);
+            Assert.AreEqual<Item>(expectedOutput[2], ItemsReturned[2]);
+            Assert.AreEqual<Item>(expectedOutput[3], ItemsReturned[3]);
+            Assert.AreEqual<Item>(expectedOutput[4], ItemsReturned[4]);
+            Assert.AreEqual<Item>(expectedOutput[5], ItemsReturned[5]);
         }
 
 
@@ -50,11 +50,11 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("+5 Dexterity Vest", 0, 20 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
+            
 
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("+5 Dexterity Vest", -1, 18 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
         }
 
         //- The Quality of an item is never negative
@@ -63,11 +63,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("+5 Dexterity Vest", 0, 0 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType( "+5 Dexterity Vest", -1, 0 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
         }
 
         //- "Aged Brie" actually increases in Quality the older it gets
@@ -76,11 +75,11 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Aged Brie", 2, 0 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
+           
 
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("Aged Brie", 1, 1 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -90,11 +89,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Aged Brie", 2, 50 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() { ItemFactory.GetItemByType("Aged Brie", 1, 50 )};
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -104,11 +102,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Sulfuras, Hand of Ragnaros", 0, 80 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("Sulfuras, Hand of Ragnaros",0,  80 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -119,11 +116,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", 15, 20 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", 14, 21 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -132,11 +128,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", 10, 20 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", 9, 22 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -145,11 +140,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", 5, 20 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", 4, 23 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
 
@@ -158,11 +152,10 @@ namespace GildedRoseCSharp.Test
         {
             List<Item> Items = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert",  0,  20 ) };
             var app = new Program(Items);
-            app.UpdateQuality();
-
+            
             List<Item> expectedOutput = new List<Item>() {  ItemFactory.GetItemByType("Backstage passes to a TAFKAL80ETC concert", -1, 0 ) };
 
-            Assert.AreEqual<Item>(expectedOutput[0], Items[0]);
+            Assert.AreEqual<Item>(expectedOutput[0], app.UpdateQuality()[0]);
 
         }
     }

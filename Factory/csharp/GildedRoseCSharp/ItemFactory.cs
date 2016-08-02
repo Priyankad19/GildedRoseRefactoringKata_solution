@@ -8,6 +8,7 @@ namespace GildedRoseCSharp
 {
     public static class ItemFactory
     {
+       
         public static Item GetItemByType(string name, int sellIn, int quality)
         {
             switch (name)
@@ -18,6 +19,8 @@ namespace GildedRoseCSharp
                     return new AgedBrie(name, sellIn, quality);
                 case "Backstage passes to a TAFKAL80ETC concert":
                     return new BackstagePasses(name, sellIn, quality);
+                case "Conjured Mana Cake":
+                    return new ConjuredItem(name, sellIn, quality);
                 default:
                     return new Regular(name, sellIn, quality);
             }

@@ -32,7 +32,7 @@ namespace GildedRoseCSharp
             if (obj == null)
                 return false;
             Item otherObject = (Item)obj;
-            if (this.Name.Equals(otherObject.Name, System.StringComparison.CurrentCultureIgnoreCase))
+            if (this.Name.Equals(otherObject.Name, System.StringComparison.CurrentCultureIgnoreCase) && this.Quality == otherObject.Quality && this.SellIn == otherObject.SellIn)
                 return true;
             else
                 return false;
@@ -42,5 +42,6 @@ namespace GildedRoseCSharp
         {
             return Name.GetHashCode();
         }
+
     }
 }
